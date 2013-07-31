@@ -17,7 +17,7 @@ class Application(tornado.web.Application):
         self.redis = redis.StrictRedis()
         self.session_store = RedisSessionStore(self.redis)
         #self.db = scoped_session(sessionmaker(bind=engine))
-        self.db = scoped_session(sessionmaker(bind=engine))
+        self.db = sessionmaker(bind=engine)
 
 
 application = Application(url_handlers, **settings)

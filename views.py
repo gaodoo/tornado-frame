@@ -37,6 +37,24 @@ class IndexHandler(BaseHandler):
         if not login redirect to the login page
         else go to the index page
         """
-        self.write('hello world')
-        body = self.br.find_element_by_name(body)
-        self.assertIn('hello world', body.text)
+        if not self.current_user:
+            self.redirect('/login')
+
+        self.write('index page')
+
+class LoginHandler(BaseHandler):
+    def get(self):
+        """
+        render the login page and login form
+        """
+        self.render('login.html')
+
+    def post(self):
+        """
+        validate the form data,
+        if fails, return the login url,
+        after fails three times use yanzheng code
+        else if success, set the user to session and
+        go to the index page
+        """
+        pass
