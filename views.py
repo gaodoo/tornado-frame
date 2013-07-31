@@ -24,3 +24,19 @@ class BaseHandler(tornado.web.RequestHandler):
     @property
     def db(self):
         return self.application.db
+
+class HelloHanlder(BaseHandler):
+    def get(self):
+        """ write hello world """
+        self.write('hello world')
+
+
+class IndexHandler(BaseHandler):
+    def get(self):
+        """
+        if not login redirect to the login page
+        else go to the index page
+        """
+        self.write('hello world')
+        body = self.br.find_element_by_name(body)
+        self.assertIn('hello world', body.text)

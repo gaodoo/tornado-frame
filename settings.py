@@ -12,6 +12,6 @@ settings = {
     'cookie_secret': 'test', # TODO: get the real secret
     'login_url': '/login',
     'xsrf_cookies': True,
-    'static_path': path.join(path.dirname(__file__), 'static')
-    'ui_modules': '' # TODO: the ui modules file
+    'static_path': path.join(path.dirname(__file__), 'static'),
+    #'ui_modules': '' # TODO: the ui modules file
 }

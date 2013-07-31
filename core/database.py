@@ -6,7 +6,12 @@ from sqlalchemy.ext.declarative import declarative_base
 
 
 engine = create_engine('mysql://root:root@localhost/cgk', echo=True)
+engine_test = create_engine('mysql://root:root@localhost/test', echo=True)
 Base = declarative_base()
 
 def create_all():
-    Base.metadata.create_all()
+    Base.metadata.create_all(bind=engine)
+
+def create_all_for_test():
+    Base.metadata.create_all(bind=engine_test)
+
