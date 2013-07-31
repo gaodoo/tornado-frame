@@ -20,3 +20,5 @@ class LoginUtilsTest(unittest.TestCase):
         password = '123456'
         self.assertTrue(isinstance(user_login(email, password)), User)
 
+if __name__ == '__main__':
+    unittest.main()

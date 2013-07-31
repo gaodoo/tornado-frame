@@ -10,11 +10,11 @@ class LoginTest(unittest.TestCase):
 
     index_url = 'localhost:8000'
 
-    def setup(self):
+    def setUp(self):
         self.br = webdriver.Firefox()
         self.br.implicitly_wait(3)
 
-    def teardowm(self):
+    def tearDown(self):
         self.br.quit()
 
     def test_signup_and_login_to_index(self):
@@ -27,6 +27,9 @@ class LoginTest(unittest.TestCase):
         """
 
         # go to the index page without login
-        self.br.open(self.index_ulr)
-        body = self.br.find_element_by_name(body)
+        self.br.get(self.index_url)
+        body = self.br.find_element_by_tag_name('body')
         self.assertIn('hello world', body.text)
+
+if __name__ == '__main__':
+    unittest.main()

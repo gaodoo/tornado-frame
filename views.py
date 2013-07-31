@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 import tornado.web
+from core import Session
 
 
 class BaseHandler(tornado.web.RequestHandler):

@@ -13,5 +13,6 @@ settings = {
     'login_url': '/login',
     'xsrf_cookies': True,
     'static_path': path.join(path.dirname(__file__), 'static'),
+    'template_path': path.join(path.dirname(__file__), 'templates'),
     #'ui_modules': '' # TODO: the ui modules file
 }
