@@ -3,6 +3,7 @@
 
 import tornado.web
 from core import Session
+from forms import RegisterForm, LoginForm
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -26,6 +27,14 @@ class BaseHandler(tornado.web.RequestHandler):
     def db(self):
         return self.application.db
 
+    def write_error(self, status_code, **kw):
+        if status_code == 404:
+            self.render('404.html')
+        elif status_code == 500:
+            self.render('500.html')
+        else:
+            super(RequestHandler, self).write_error(status_code, **kw)
+
 class HelloHanlder(BaseHandler):
     def get(self):
         """ write hello world """
@@ -48,7 +57,10 @@ class LoginHandler(BaseHandler):
         """
         render the login page and login form
         """
-        self.render('login.html')
+        lform = LoginForm()
+        rform = RegisterForm()
+
+        self.render('login.html', lform=lform, rform=rform)
 
     def post(self):
         """
@@ -58,4 +70,11 @@ class LoginHandler(BaseHandler):
         else if success, set the user to session and
         go to the index page
         """
-        pass
+        print self.request.arguments
+        form = LoginForm(self.request.arguments)
+        print form.data
+        if not form.validate():
+            self.render('login.html', form=form)
+
+        #user = self.user_login(form.)
+        self.render('index.html')

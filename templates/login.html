@@ -6,5 +6,26 @@
 </head>
 <body>
     hello world
+    {% autoescape None %}
+    <form action="/login" method="post" name="login">
+        <ul>
+            {% module xsrf_form_html() %}
+            <li>
+            {{ lform.email.label }} : {{ lform.email() }}
+            </li>
+            <li>
+            {{ lform.password.label }}: {{ lform.password() }}
+            </li>
+            <input type='submit' value='提交'/>
+        </ul>
+    </form>
+    <form action="/register" method="post" name="register">
+        {% module xsrf_form_html() %}
+        {{ rform.email.label }}: {{ rform.email() }}
+        {{ rform.username.label }} : {{ rform.username() }}
+        {{ rform.password.label }} : {{ rform.password() }}
+        {{ rform.rpassword.label }} : {{ rform.rpassword() }}
+    </form>
+
 </body>
 </html>
