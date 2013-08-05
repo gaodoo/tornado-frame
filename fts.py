@@ -26,10 +26,30 @@ class LoginTest(unittest.TestCase):
         login success and we were take to the index page
         """
 
-        # go to the index page without login
+        # go to the index page without login, and we
+        # were take to the login page
         self.br.get(self.index_url)
         body = self.br.find_element_by_tag_name('body')
-        self.assertIn('hello world', body.text)
+        self.assertNotIn('index page', body.text)
+        title = self.br.find_element_by_tag_name('title')
+        self.assertEqual(u'login or register cgk', title)
+
+        # login with wrong email and password, fails
+
+        # after three fail we need input the 验证码
+
+        # we now register to the cgk and success
+
+        # we login with the new register email and password,
+        # and we sucessed goto the index page
+
+        # we signout and found need login again
+
+        # we cheese the remind-me and login seccussd
+
+        # we close the browser and reopen the index tobe login
+
+        # done
 
 if __name__ == '__main__':
     unittest.main()

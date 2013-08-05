@@ -58,8 +58,15 @@ class LoginForm(Form):
     """
     the login form
     """
-    email = TextField('email', [validators.Length(min=6, max=64)])
-    password = PasswordField('password', [validators.Length(min=6, max=30)])
+    email = TextField(
+            label='email',
+            validators=[validators.Length(min=6, max=64)])
+    password = PasswordField(
+            label='password',
+            validators=[validators.Length(min=6, max=30)])
+    remind_me = BooleanField(
+            label='remind-me',
+            default=False)
 
 
 class RegisterForm(Form):
@@ -67,14 +74,13 @@ class RegisterForm(Form):
     the register form
     """
     email = TextField(
-        label='email',
+        label='mail',
         validators=[validators.Length(min=6, max=64)],
-        description='your email, be serious'
-    )
-    username = TextField(
-        label='username',
+        description='your email, be serious')
+    firstname = TextField(
+        label='firstname',
         validators=[],
-        description='',
-    )
-    password = PasswordField('password')
-    rpassword = PasswordField('rpassword')
+        description='')
+    lastname = TextField(label='lastname')
+    password = PasswordField(label='password')
+    rpassword = PasswordField(label='re-password')

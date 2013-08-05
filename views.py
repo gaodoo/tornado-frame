@@ -15,6 +15,17 @@ class BaseHandler(tornado.web.RequestHandler):
         else:
             return None
 
+    def user_login(self, email, password):
+        # user the utils login and set user
+        # on the session. or return none if fails
+
+        # login_result = user_login(email, password)
+        login_result = None
+        if login_result:
+            self.session.set_session('user', login_result)
+
+        return login_result
+
     @property
     def session(self):
         sessionid = self.get_secure_cookie('sid')
@@ -27,13 +38,13 @@ class BaseHandler(tornado.web.RequestHandler):
     def db(self):
         return self.application.db
 
-    def write_error(self, status_code, **kw):
-        if status_code == 404:
-            self.render('404.html')
-        elif status_code == 500:
-            self.render('500.html')
-        else:
-            super(RequestHandler, self).write_error(status_code, **kw)
+    #def write_error(self, status_code, **kw):
+        #if status_code == 404:
+            #self.render('404.html')
+        #elif status_code == 500:
+            #self.render('500.html')
+        #else:
+            #super(RequestHandler, self).write_error(status_code, **kw)
 
 class HelloHanlder(BaseHandler):
     def get(self):
@@ -78,3 +89,14 @@ class LoginHandler(BaseHandler):
 
         #user = self.user_login(form.)
         self.render('index.html')
+
+class RegisterHandler(BaseHandler):
+    """ handler for register"""
+    def get(self):
+        lform = LoginForm()
+        rform = RegisterForm()
+
+        self.render('login.html', lform=lform, rform=rform)
+
+    def register(self):
+        pass
