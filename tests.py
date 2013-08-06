@@ -39,8 +39,11 @@ class LoginUtilsTest(unittest.TestCase):
     test for utils.user_login
     """
     def setUp(self):
-        self._test_db_setup()
-        self._fixture_setup()
+        email = 'tmp@tmp.com'
+        password = '123456'
+        u = User(email, password, 'firstname', 'lastname')
+        db_session.add(u)
+        db_session.commit()
 
     def tearDown(self):
         self._fixture_remove()
@@ -55,13 +58,7 @@ class LoginUtilsTest(unittest.TestCase):
     def test_login_with_correct_msg_return_User_obj(self):
         email = 'tmp@tmp.com'
         password = '123456'
-        u = User(email, password, 'firstname', 'lastname')
-        db_session.add(u)
-        db_session.commit()
         user = User.login(email, password)
-        print ">>>>>>>>>>>>>>>>>>"
-        print type(user)
-        print
         self.assertTrue(isinstance(user, User))
 
 if __name__ == '__main__':
