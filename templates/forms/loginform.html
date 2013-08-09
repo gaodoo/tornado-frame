@@ -1,0 +1,11 @@
+{% autoescape None %}
+{% module xsrf_form_html() %}
+<ul>
+    <li>
+    {{ lform.email(placeholder=lform.email.label.text) }}
+    </li>
+    <li>
+    {{ lform.password(placeholder=lform.email.label.text) }}
+    </li>
+    <input type='submit' value='提交'/>
+</ul>

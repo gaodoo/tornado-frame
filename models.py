@@ -6,15 +6,28 @@ import hashlib
 from datetime import datetime
 from core import engine, Base, create_all
 from core import db_session
-from sqlalchemy import Column, ForeignKey
+from sqlalchemy import Table, Column, ForeignKey
 from sqlalchemy import Integer, String, Boolean, Unicode
 from sqlalchemy import DateTime, Time
 from sqlalchemy.orm import column_property, validates
 from sqlalchemy.orm import relationship, backref
 
 
+class Useruser(Base):
+    __tablename__ = 'user_user_attend'
+    __table_args__ = {'mysql_charset': 'utf8',
+                      'mysql_engine': 'InnoDB',}
+
+    uid = Column(Integer, ForeignKey('user.uid'), primary_key=True)
+    attend_uid = Column(Integer, ForeignKey('user.uid'), primary_key=True)
+    attend_time = Column(Time, default=datetime.now, doc=u'关注时间')
+
+    def __repr__(self):
+        return '<user: id: %s> attends <user: id: %s> at %s' % (
+            self.uid, self.attend_uid, self.attend_time)
+
 class User(Base):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
     __table_args__ = {'mysql_charset': 'utf8',
                       'mysql_engine': 'InnoDB',}
 
@@ -32,8 +45,14 @@ class User(Base):
     telphone = Column(String(32), doc=u'联系方式，电话')
     is_admin = Column(Boolean, default=False, doc=u'是否为管理员')
     create_time = Column(Time(), default=datetime.now, doc=u'创建时间')
-    subjects = relationship('UserSubject', doc=u'关注话题')
-    attends = relationship('UserUser', primaryjoin='UserUser.uid==User.uid', doc=u'关注用户')
+    subjects = relationship('UserSubject', backref='sub_atteners', doc=u'关注话题')
+    attends = relationship(
+        'User',
+        secondary='user_user_attend',
+        primaryjoin=uid==Useruser.uid,
+        secondaryjoin=uid==Useruser.attend_uid,
+        backref='attenders'
+    )
 
     def __init__(self, email, password, firstname=None, lastname=None):
         self.email = email
@@ -58,6 +77,7 @@ class User(Base):
     def login(email, password):
         """
         TODO: unittest
+        return User instance or None
         """
         pw = hashlib.md5(password).digest()
         user = db_session.query(User).filter(User.email==email).filter(
@@ -68,6 +88,7 @@ class User(Base):
     def register(email, password, firstname, lastname):
         """
         register new user
+        TODO: 设计输出, try ..except
         """
         user = User(email, password)
         user.firstname = firstname
@@ -78,30 +99,21 @@ class User(Base):
 
 class UserSubject(Base):
     """
-    the relation table between user and subject
+    用户-话题-关注表 model
     """
     __tablename__ = 'user_subject_relation'
     __table_args__ = {'mysql_charset': 'utf8',
                       'mysql_engine': 'InnoDB',}
-    uid = Column(Integer, ForeignKey('users.uid'), primary_key=True)
+    uid = Column(Integer, ForeignKey('user.uid'), primary_key=True)
     sid = Column(Integer, ForeignKey('subject.sid'), primary_key=True)
-    subject = relationship('Subject')
-    create_time = Column(Time(), default=datetime.now, doc=u'关注时间')
-
-class UserUser(Base):
-    """
-    the relation table between user and user
-    """
-    __tablename__ = 'user_user_relation'
-    __table_args__ = {'mysql_charset': 'utf8',
-                      'mysql_engine': 'InnoDB',}
-    uid = Column(Integer, ForeignKey('users.uid'), primary_key=True, doc=u'关注者id')
-    attend_uid = Column(Integer, ForeignKey('users.uid'), primary_key=True, doc=u'被关注者id')
-    attends = relationship('User', primaryjoin='User.uid==UserUser.attend_uid')
+    subject = relationship('Subject', backref='sub_attender')
     create_time = Column(Time(), default=datetime.now, doc=u'关注时间')
 
 
 class Subject(Base):
+    """
+    话题表 models
+    """
     __tablename__ = 'subject'
     __table_args__ = {'mysql_charset': 'utf8',
                       'mysql_engine': 'InnoDB',}
@@ -116,8 +128,28 @@ class Subject(Base):
         self.s_desc = s_desc
 
 
+class Works(Base):
+    """
+    作品主表
+    """
+    __tablename__ = 'subject'
+    __table_args__ = {'mysql_charset': 'utf8',
+                      'mysql_engine': 'InnoDB',}
+
+    wid = Column(Integer, primary_key=True, doc=u'作品表')
+    # uid
+    w_title = Column(Unicode(128), nullable=False, doc=u'作品名')
+    w_short_desc = Column(Unicode(256), doc=u'作品简述')
+    w_long_desc = Column(Unicode(1024), doc=u'作品明细')
+    w_type = Column(Integer, doc=u'作品类型') # TODO: 类型自动划分
+    w_save_path = Column(String(), doc=u'存储路径') # 二进制存储
+
+
 def drop_all():
-    Base.metadata.drop_all()
+    Base.metadata.drop_all(engine)
 
 if __name__ == '__main__':
+    drop_all()
     create_all()
+    print Base.metadata.tables
+    print dir(Base.metadata)

@@ -1,31 +1,10 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    hello world
-    {% autoescape None %}
+{% extends "base.html" %}
+
+{% block content %}
     <form action="/login" method="post" name="login">
-        <ul>
-            {% module xsrf_form_html() %}
-            <li>
-            {{ lform.email.label }} : {{ lform.email() }}
-            </li>
-            <li>
-            {{ lform.password.label }}: {{ lform.password() }}
-            </li>
-            <input type='submit' value='提交'/>
-        </ul>
+        {% include "forms/loginform.html" %}
     </form>
     <form action="/register" method="post" name="register">
-        {% module xsrf_form_html() %}
-        {{ rform.email.label }}: {{ rform.email() }}
-        {{ rform.firstname.label }} : {{ rform.firstname() }}
-        {{ rform.password.label }} : {{ rform.password() }}
-        {{ rform.rpassword.label }} : {{ rform.rpassword() }}
+        {% include "forms/registerform.html" %}
     </form>
-
-</body>
-</html>
+{% end %}

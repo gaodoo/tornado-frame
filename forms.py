@@ -59,13 +59,13 @@ class LoginForm(Form):
     the login form
     """
     email = TextField(
-            label='email',
+            label=u'邮箱',
             validators=[validators.Length(min=6, max=64)])
     password = PasswordField(
-            label='password',
+            label=u'密码',
             validators=[validators.Length(min=6, max=30)])
     remind_me = BooleanField(
-            label='remind-me',
+            label='记住我',
             default=False)
 
 
@@ -74,13 +74,13 @@ class RegisterForm(Form):
     the register form
     """
     email = TextField(
-        label='mail',
+        label=u'邮箱',
         validators=[validators.Length(min=6, max=64)],
         description='your email, be serious')
     firstname = TextField(
-        label='firstname',
+        label=u'姓',
         validators=[],
         description='')
-    lastname = TextField(label='lastname')
-    password = PasswordField(label='password')
-    rpassword = PasswordField(label='re-password')
+    lastname = TextField(label=u'名')
+    password = PasswordField(label=u'密码')
+    rpassword = PasswordField(label=u'密码确认')

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}CGK{% end %}
+    </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<! -- bootstrap -->
+    <link rel="stylesheet" href="{{ static_url('bootstrap/css/bootstrap.min.css') }}" media="screen">
+</head>
+<body>
+    {% block header %}
+        hello world
+    {% end %}
+    {% block content %}
+    {% end %}
+    {% block footer %}
+    {% end %}
+    <script type="text/javascript" src="{{ static_url('jquery_1.10.2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ static_url('bootstrap/js/bootstrap.min.js') }}"></script>
+</body>
+</html>
