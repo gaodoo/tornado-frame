@@ -8,9 +8,10 @@ from core import engine_test as engine
 from core import create_all_for_test as create_all
 from core import drop_all_for_test as drop_all
 from models import User
+from forms import LoginForm, RegisterForm
 
 
-class FixTureTest(unittest.TestCase):
+class FixtureTest(unittest.TestCase):
     """
     the base test for use tmp_db and install self.fixture
     """
@@ -31,6 +32,7 @@ class FixTureTest(unittest.TestCase):
             pass
 
     def _fixture_remove(self):
+        pass
 
 
 
@@ -39,6 +41,8 @@ class LoginUtilsTest(unittest.TestCase):
     test for utils.user_login
     """
     def setUp(self):
+        drop_all()
+        create_all()
         email = 'tmp@tmp.com'
         password = '123456'
         u = User(email, password, 'firstname', 'lastname')
@@ -46,8 +50,9 @@ class LoginUtilsTest(unittest.TestCase):
         db_session.commit()
 
     def tearDown(self):
-        self._fixture_remove()
-        self._test_db_uninstall()
+        #self._fixture_remove()
+        #self._test_db_uninstall()
+        drop_all()
 
     def test_login_with_error_msg_return_none(self):
         email = 'tmp@tmp.com'
@@ -60,6 +65,35 @@ class LoginUtilsTest(unittest.TestCase):
         password = '123456'
         user = User.login(email, password)
         self.assertTrue(isinstance(user, User))
+
+
+class ModelTest(unittest.TestCase):
+    """
+    model test case
+    """
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+
+#class LoginFormTest(unittest.TestCase):
+    #"""
+    #test for login form
+    #"""
+    #def setUp(self):
+        #pass
+
+    #def tearDown(self):
+        #pass
+
+    #def test_login_form_with_no_data_output_the_right_html(self):
+        #form = LoginForm()
+        #self.assertTrue(form.data.has_key('email'))
+        #self.assertTrue(form.data.has_key('password'))
+        #self.assertTrue(form.data.has_key('remind_me'))
+
 
 if __name__ == '__main__':
     unittest.main()
