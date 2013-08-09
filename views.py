@@ -34,6 +34,10 @@ class BaseHandler(tornado.web.RequestHandler):
             self.set_secure_cookie('sid', session._sessionid)
         return session
 
+    def on_finish(self):
+        """ for session store """
+        self.session._save()
+
     @property
     def db(self):
         return self.application.db
