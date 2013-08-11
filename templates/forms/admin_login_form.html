@@ -1,0 +1,31 @@
+{% autoescape None %}
+
+{% module xsrf_form_html() %}
+
+<div class="control-group">
+    <div class="control-label">
+        {{ form.email.label() }}
+    </div>
+    <div class="controls">
+        {{ form.email(placeholder=u"邮箱") }}
+    </div>
+</div>
+
+<div class="control-group">
+    <div class="control-label">
+        {{ form.password.label() }}
+    </div>
+    <div class="controls">
+        {{ form.password(placeholder=u"密码") }}
+    </div>
+</div>
+
+<div class="control-group">
+    <div class="controls">
+        <label class="checkbox" for="">
+            {{ form.remind_me() }} <span>记住我</span>
+        </label>
+        <input class="btn btn-info btn-large" type="submit" value="登录CGK管理员" />
+    </div>
+</div>
+<!-- /TODO: error message -->

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}CGK Admin{% end %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			{% block sidebar %}
+
+			{% end %}
+		</div>
+	<!-- /the admin sidebar -->
+		<div class="span9">
+			{% block main %}
+			{% end %}
+		</div>
+	<!-- /admin main -->
+	</div>
+</div>
+{% end %}
+
+

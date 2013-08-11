@@ -1,0 +1,12 @@
+{% extends "../admin_base.html" %}
+
+{% block %}
+
+{% block main %}
+    <h1 style="text-align:center;margin-bottom:40px;">admin login</h1>
+    <form class="form-horizontal" action="/admin/login" method="post" name="fm" >
+        <fieldset>
+            {% include "../forms/admin_login_form.html" %}
+        </fieldset>
+    </form>
+{% end %}

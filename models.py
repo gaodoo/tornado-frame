@@ -13,6 +13,9 @@ from sqlalchemy.orm import column_property, validates
 from sqlalchemy.orm import relationship, backref
 
 
+__all__ = ['User', 'Useruser',]
+
+
 class Useruser(Base):
     __tablename__ = 'user_user_attend'
     __table_args__ = {'mysql_charset': 'utf8',
@@ -132,7 +135,7 @@ class Works(Base):
     """
     作品主表
     """
-    __tablename__ = 'subject'
+    __tablename__ = 'work'
     __table_args__ = {'mysql_charset': 'utf8',
                       'mysql_engine': 'InnoDB',}
 
@@ -142,7 +145,7 @@ class Works(Base):
     w_short_desc = Column(Unicode(256), doc=u'作品简述')
     w_long_desc = Column(Unicode(1024), doc=u'作品明细')
     w_type = Column(Integer, doc=u'作品类型') # TODO: 类型自动划分
-    w_save_path = Column(String(), doc=u'存储路径') # 二进制存储
+    w_save_path = Column(String(512), doc=u'存储路径') # 二进制存储
 
 
 def drop_all():

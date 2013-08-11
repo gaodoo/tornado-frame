@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title> CGK Admin </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<! -- bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" media="screen">
+</head>
+<body>
+	<div class="container-fluid">
+		<h1 style="text-align:center;margin:40px;color:#888;">admin login</h1>
+		<div class="row-fluid">
+			<div class="offset3 span9">
+				<form class="form-horizontal" action="/admin/login" method="post" name="fm" >
+					<fieldset>
+						<div class="control-group">
+							<div class="control-label">
+								<label for="email">邮箱:</label>
+							</div>
+							<div class="controls">
+								<input type="text" placeholder="邮箱" />
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="control-label">
+								<label for="password">密码:</label>
+							</div>
+							<div class="controls">
+								<input type="password" name="password" placeholder='密码'/>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<label class="checkbox" for="">
+									<input type="checkbox" name="remind-me" />
+									<span>记住我</span>
+								</label>
+								<input class="btn btn-info btn-large" type="submit" value="登录CGK管理员" />
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		<!-- /admin main -->
+		</div>
+	</div>
+	<script type="text/javascript" src="jquery_1.10.2.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
