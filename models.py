@@ -13,9 +13,6 @@ from sqlalchemy.orm import column_property, validates
 from sqlalchemy.orm import relationship, backref
 
 
-__all__ = ['User', 'Useruser',]
-
-
 class Useruser(Base):
     __tablename__ = 'user_user_attend'
     __table_args__ = {'mysql_charset': 'utf8',
@@ -150,6 +147,10 @@ class Works(Base):
 
 def drop_all():
     Base.metadata.drop_all(engine)
+
+
+__all__ = ['User', 'Useruser',]
+
 
 if __name__ == '__main__':
     drop_all()
