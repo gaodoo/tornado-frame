@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<! -- bootstrap -->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" href="css/login.css" type="text/css" media="screen" />
+	<style type="text/css">
+		h3{
+			color: #fff;
+			margin-right: 10px;
+		}
+		.nav>li>a {
+			color: #fff;
+		}
+		#active>a{
+			background-color: inherit;
+			color:#E08E1F;
+		}
+        a {
+            color: #BCD3FF;
+        }
+		#user{
+			position: absolute;
+			top: 20px;
+			right: 400px;
+		}
+		#sidebar>li>a{
+			color: #535353;
+		}
+        .fl {
+            float: left;
+        }
+        .fr {
+            float: right;
+        }
+	</style>
+</head>
+<body>
+	<div class="container-fluid" style="background-color:#224CE9;">
+		<div class="container">
+			<div class="row mgt20">
+				<div class="span5">
+					<form class="form-search" action="">
+						<h3 style='display: inline'>CGK</h3>
+						<input class="search-query" type="text" />
+						<input type="button" class="btn btn-info" value="搜索" />
+					</form>
+				</div>
+				<div class="offset1 span6">
+					<ul class="nav nav-pills">
+					    <li><a href="">首页</a></li>
+					    <li id='active' class='active'><a href="">话题</a></li>
+					    <li><a href="">发现</a></li>
+					    <li><a href="">消息</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="user" style="margin-top: 8px;">
+				<img src="" style="width: 30px; height: 18px; margin-right: 10px;" alt="" />
+				<strong style='color:#fff;'>张钰</strong>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="span8">
+                <div class="row mgt0">
+                    <div class="span1"><strong>最新动态</strong></div>
+                    <div class="offset6 span1">设置</div>
+                </div>
+                <hr />
+                <div class="row">
+                    <p style="text-align:center;">
+                        我们推荐你关注这些人
+                        <a>换一批</a>
+                        <a>更多推荐</a>
+                    </p>
+                </div>
+                <div class="container-fluid" style="padding: 0px;border: 1px solid #000;">
+                    <dir class="row-fluid">
+                        <div class="span4 fl">
+                            <div class="row-fluid">
+                                <div class="span3">
+                                    <img src="" alt="" style="width:35px; height: 25px; border: 1px solid #fff;" />
+                                    <span class='fr'>张裕</span>
+                                    <span class="fr">19个回答</span>
+                                </div>
+                            </div>
+                        </div>
+                    </dir>
+                </div>
+			</div>
+			<div class="span3" style="margin-left:30px;padding-left:30px; border-left: 1px solid #888;" >
+				<ul id='sidebar' class="nav nav-pills nav-stacked">
+					<li><a href="">我的草稿</a></li>
+					<li><a href="">我的收藏</a></li>
+					<li><a href="">我的关注</a></li>
+                    <li><a href="">邀请我回答的问题</a></li>
+				</ul>
+				<hr />
+				<ul id="sidebar" class="nav nav-pills nav-stacked">
+					<li><a href="">所有文章</a></li>
+					<li><a href="">话题广场</a></li>
+					<li><a href="">作品广场</a></li>
+					<li><a href="">资源广场</a></li>
+					<li><a href="">邀请朋友来CGK</a></li>
+				</ul>
+				<hr />
+                <div id="att_subjexts">
+                    <div>
+                        <span><strong>常去话题</strong></span>
+                        <span style="float:right;"><a style="color: #86AFFF;" href="">查看全部>></a></span>
+                    </div>
+                    <ul id="sidebar" class="nav nav-pills nav-stacked">
+                        <li><a href="">音乐</a></li>
+                        <li><a href="">互联网</a></li>
+                        <li><a href="">科技</a></li>
+                    </ul>
+                </div>
+                <hr />
+                <div id="att_user">
+                    <div>
+                        <span><strong>你可能感兴趣的人</strong></span>
+                        <span style="float:right;"><a style="color: #86AFFF;" href="">查看全部>></a></span>
+                    </div>
+                    <ul id="sidebar" class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href=""><span>成功人找方法，失败的找理由</span></a>
+                            <span>他也关注互联网</span><a href="">关注</a>
+                        </li>
+                        <li>
+                            <a href=""><span>成功人找方法，失败的找理由</span></a>
+                            <span>他也关注互联网</span><a href="">关注</a>
+                        </li>
+                        <li>
+                            <a href=""><span>成功人找方法，失败的找理由</span></a>
+                            <span>他也关注互联网</span><a href="">关注</a>
+                        </li>
+                    </ul>
+                </div>
+                <hr />
+                <div style="border: 1px solid #86afff;height: 90px;"></div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery_1.10.2.min.js"></script>
+	<script type="text/javascript" src='bootstrap/js/bootstrap.min.js'></script>
+    <script type="text/javascript" src="js/common.js"></script>
+</body>
+</html>
