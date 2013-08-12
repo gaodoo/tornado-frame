@@ -69,6 +69,21 @@ class LoginForm(Form):
             default=False)
 
 
+class MessageForm(Form):
+    """
+    the register message form
+    """
+    qq = TextField(
+        label=u'qq',
+        validators=[validators.Length(min=6, max=11)]
+    )
+    telphone = TextField(
+        label=u'联系方式',
+        validators=[validators.Length(min=7, max=15)]
+    )
+
+
+
 class RegisterForm(Form):
     """
     the register form

@@ -1,0 +1,53 @@
+.mgt30 {
+    margin-top: 30px;
+}
+.mgt20 {
+    margin-top: 20px;
+}
+.mgt10 {
+    margin-top: 10px;
+}
+.mgb20 {
+    margin-bottom: 20px;
+}
+.mgb10{
+    margin-bottom: 10px;
+}
+.mgt50{
+    margin-top: 50px;
+}
+.pdl20{
+    padding-left:30px;
+}
+#btn-login {
+    width:210px;
+    margin:auto 5px 10px;
+    height: 40px;
+}
+a, a:hover, a:focus {
+    color: #ffffff;
+}
+.fl{
+    float: left;
+}
+#site_title {
+    letter-spacing: 3px;
+    line-height:85px;
+    margin-top:0px;
+    font-size:80px;
+    font-weight:lighter;
+}
+#login_header {
+    background-color:#0078D8;
+    color: #ffffff;
+}
+#login_body {
+    background-color:#EFF2F5;
+}
+div .hide {
+    display: None;
+}
+#login_subject {
+    border:1px solid blue;
+    min-height:300px;
+}

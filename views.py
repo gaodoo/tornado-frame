@@ -3,8 +3,8 @@
 
 import tornado.web
 from core import Session
-from forms import RegisterForm, LoginForm
-from models import User
+from forms import RegisterForm, LoginForm, MessageForm
+from models import User, Subject
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -95,6 +95,7 @@ class AdminIndexHandler(AdminBaseHandler):
     def get(self):
         self.render('admin/index.html')
 
+
 class AdminLoginHandler(AdminBaseHandler):
     """
     the admin login handler
@@ -113,12 +114,6 @@ class AdminLoginHandler(AdminBaseHandler):
         if not form.validator() or not user:
             self.render('admin/login.html', form=form)
         self.redirect('/admin')
-
-
-class HelloHanlder(BaseHandler):
-    def get(self):
-        """ write hello world """
-        self.write('hello world')
 
 
 class IndexHandler(BaseHandler):
@@ -150,11 +145,10 @@ class LoginHandler(BaseHandler):
         else if success, set the user to session and
         go to the index page
         """
-        print self.request.arguments
-        form = LoginForm(self.request.arguments)
-        print form.data
+        lform = LoginForm(self.request.arguments)
         if not form.validate():
-            self.render('login.html', form=form)
+            rform = RegisterForm()
+            self.render('login.html', lform=lform, rform=rform)
 
         #user = self.user_login(form.)
         self.render('index.html')
@@ -168,5 +162,40 @@ class RegisterHandler(BaseHandler):
         self.render('login.html', lform=lform, rform=rform)
 
     def register(self):
-        pass
+        rform = RegisterForm(self.request.arguments)
+        if not form.validate():
+            lform = LoginForm()
+            self.render('login.html', lform=lform, rform=rform)
+        # register uesr
+        user = User(rform.data.email, rform.data.password,
+                rform.data.firstname, rform.lastname)
+        self.db.add(user)
+        self.db.commit()
+        # set user into the session
+        self.set_session('user', user)
+        self.render('register_step.html')
+
+class RegisterStep(BaseHandler):
+    """
+    handler for register steps goon
+    """
+    def post(self, step):
+        # first step
+        if step == "info":
+            self.render('rstep_one.html')
+        # two step, for more info
+        elif step == "message":
+            form = MessageForm()
+            self.render('rstep_two.html', form=form)
+        # third step, for attend users
+        elif step == "attend":
+            users = self.db.query(User).order_by(User.create_time).limit(20)
+            self.render('rstep_three.html', users=user)
+        # fourth step, for attend subjects
+        elif step == "subject":
+            subjects = self.db.query(Subject).order_by(Subject.create_time).limit(20)
+            self.render('rstep_four.html', subjects=subjects)
+        # last, finish and redirect index page
+        elif step == "finish":
+            self.redirect('/')
 

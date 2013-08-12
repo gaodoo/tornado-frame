@@ -3,10 +3,51 @@
 {% block title %}login or register CGK{% end %}
 
 {% block content %}
-    <form action="/login" method="post" name="login">
-        {% include "forms/loginform.html" %}
-    </form>
-    <form action="/register" method="post" name="register">
-        {% include "forms/registerform.html" %}
-    </form>
+	<div class="container-fluid" id="login_header">
+		<div class="container">
+			<div class="row">
+				<div class="span5 mgt50">
+					<h1 id="site_title">CGK</h1>
+					<h5>cgk's home!</h5>
+					<h5>CG客,聚集国内CG领军人物!</h5>
+				</div>
+				<div class="offset1 span6">
+					<div class="row" >
+						<div id="register-form" class="offset3 span3">
+                            <form action="/register" method="post" name="register-form">
+                                {% include "forms/registerform.html" %}
+                            </form>
+						</div>
+						<div id="login-form" class="offset3 span3 mgt30 hide">
+                            <form action="/login" method="post" name="login-form">
+                                {% include "forms/loginform.html" %}
+                            </form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!-- /#login_header -->
+	<div class="container-fluid" id="login_body">
+		<div class="container">
+			<div class="row">
+				<div class="span4 mgb20">
+                    {% for i in range(5) %}
+                        <div class="row mgt20">
+                            {% for j in range(4) %}
+                            <div class="span1">
+                                <img class="img-circle" src="t1.jpg" alt="" />
+                            </div>
+                            {% end %}
+                        </div>
+                    {% end %}
+				</div>
+				<div class="offset1 span6" id="login_subject">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+    <!-- /#login_body -->
 {% end %}

@@ -7,7 +7,7 @@ from datetime import datetime
 from core import engine, Base, create_all
 from core import db_session
 from sqlalchemy import Table, Column, ForeignKey
-from sqlalchemy import Integer, String, Boolean, Unicode
+from sqlalchemy import Integer, String, Boolean, Unicode, Text
 from sqlalchemy import DateTime, Time
 from sqlalchemy.orm import column_property, validates
 from sqlalchemy.orm import relationship, backref
@@ -46,6 +46,11 @@ class User(Base):
     is_admin = Column(Boolean, default=False, doc=u'是否为管理员')
     create_time = Column(Time(), default=datetime.now, doc=u'创建时间')
     subjects = relationship('UserSubject', backref='sub_atteners', doc=u'关注话题')
+    works = relationship('Work', backref="work_owner", doc=u"作品")
+    sources = relationship('Source', backref="source_owner", doc=u"资源")
+    articles = relationship('Article', backref='article_owner', doc=u'文章')
+    questions = relationship('Question', backref='question_owner', doc=u'问题')
+    answer = relationship('Answer', backref='anwser_owner', doc=u'回答')
     attends = relationship(
         'User',
         secondary='user_user_attend',
@@ -128,6 +133,16 @@ class Subject(Base):
         self.s_desc = s_desc
 
 
+#class SourceBase(Base):
+    #"""
+    #抽象models, TODO: not tables
+    #"""
+    #__table_args__ = {'mysql_charset': 'utf8',
+                      #'mysql_engine': 'InnoDB',}
+
+    #create_time = Column(Time(), default=datetime.now, doc=u'创建时间')
+
+
 class Works(Base):
     """
     作品主表
@@ -137,12 +152,104 @@ class Works(Base):
                       'mysql_engine': 'InnoDB',}
 
     wid = Column(Integer, primary_key=True, doc=u'作品表')
-    # uid
+    uid = Column(Integer, ForeignKey('user.uid'))
     w_title = Column(Unicode(128), nullable=False, doc=u'作品名')
     w_short_desc = Column(Unicode(256), doc=u'作品简述')
     w_long_desc = Column(Unicode(1024), doc=u'作品明细')
     w_type = Column(Integer, doc=u'作品类型') # TODO: 类型自动划分
     w_save_path = Column(String(512), doc=u'存储路径') # 二进制存储
+    create_time = Column(Time(), default=datetime.now, doc=u'创建时间')
+
+    def __init__(self, title, w_type, w_save_path, short_desc='', long_desc=''):
+        self.w_title = title
+        self.w_type = w_type
+        self.w_save_path = w_save_path
+        self.w_short_desc = short_desc
+        self.w_long_desc = long_desc
+
+class Source(Base):
+    """
+    资源主表
+    """
+    __tablename__ = 'source'
+    __table_args__ = {'mysql_charset': 'utf8',
+                      'mysql_engine': 'InnoDB',}
+    sc_id = Column(Integer, primary_key=True, doc=u'资源id')
+    uid = Column(Integer, ForeignKey('user.uid'))
+    sc_title = Column(Unicode(128), nullable=False, doc=u'资源名')
+    sc_short_desc = Column(Unicode(256), doc=u'简述')
+    sc_long_desc = Column(Unicode(1024), doc=u'明细')
+    sc_type = Column(Integer, doc=u'资源类型')
+    sc_save_path = Column(String(512), doc=u'存储路径')
+    create_time = Column(Time(), default=datetime.now, doc=u'创建时间')
+
+    def __init__(self, title, sc_type, sc_save_path, short_desc='', long_desc=''):
+        self.sc_title = title
+        self.sc_type = sc_type
+        self.sc_save_path = sc_save_path
+        self.sc_short_desc = short_desc
+        self.sc_long_desc = long_desc
+
+
+class article(Base):
+    """
+    资源主表
+    """
+    __tablename__ = 'article'
+    __table_args__ = {'mysql_charset': 'utf8',
+                      'mysql_engine': 'InnoDB',}
+
+    at_id = Column(Integer, primary_key=True, doc=u'文章id')
+    uid = Column(Integer, ForeignKey('user.uid'))
+    at_title = Column(Unicode(128), nullable=False, doc=u'文章名')
+    at_short_desc = Column(Unicode(256), doc=u'简述')
+    at_long_desc = Column(Unicode(1024), doc=u'明细')
+    content = Column(Text, doc=u'文章内容')
+    create_time = Column(Time(), default=datetime.now, doc=u'创建时间')
+
+    def __init__(self, title, at_type, at_save_path, short_desc='', long_desc=''):
+        self.at_title = title
+        self.at_type = at_type
+        self.at_save_path = at_save_path
+        self.at_short_desc = short_desc
+        self.at_long_desc = long_desc
+
+
+class Question(Base):
+    """
+    问题表
+    """
+    __tablename__ = 'question'
+    __table_args__ = {'mysql_charset': 'utf8',
+                      'mysql_engine': 'InnoDB',}
+
+    q_id = Column(Integer, primary_key=True, doc=u'问题id')
+    q_short_desc = Column(Unicode(256), doc=u'简述')
+    q_long_desc = Column(Text, doc=u'明细')
+    anwsers =  relationship('Answer', backref='question', doc=u'回答')
+    create_time = Column(Time(), default=datetime.now, doc=u'创建时间')
+
+    def __init__(self, short_desc, long_desc=''):
+        self.q_short_desc = short_desc
+        self.q_long_desc = q_long_desc
+
+
+class Answer(Base):
+    """
+    问题回答表
+    """
+    __tablename__ = 'answer'
+    __table_args__ = {'mysql_charset': 'utf8',
+                      'mysql_engine': 'InnoDB',}
+
+    an_id = Column(Integer, primary_key=True, doc=u'回答id')
+    q_id = Column(Integer, ForeignKey('question.qid'))
+    uid = Column(Integer, ForeignKey('user.uid'))
+    an_content = Column(Text, doc=u'内容')
+    create_time = Column(Time(), default=datetime.now, doc=u'创建时间')
+
+    def __init__(self, content):
+        self.an_content = content
 
 
 def drop_all():

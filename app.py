@@ -12,7 +12,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 
 class Application(tornado.web.Application):
-    def __init__(self, handlers, **settings):
+    def __init__(self, handlers, db_session, **settings):
         tornado.web.Application.__init__(self, handlers, **settings)
         #self.db_session = db_session
         self.redis = redis.StrictRedis()
@@ -21,7 +21,7 @@ class Application(tornado.web.Application):
         self.db = db_session
 
 
-application = Application(url_handlers, **settings)
+application = Application(url_handlers, db_session, **settings)
 
 
 if __name__ == "__main__":

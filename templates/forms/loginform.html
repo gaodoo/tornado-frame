@@ -1,11 +1,31 @@
 {% autoescape None %}
 {% module xsrf_form_html() %}
-<ul>
-    <li>
-    {{ lform.email(placeholder=lform.email.label.text) }}
-    </li>
-    <li>
-    {{ lform.password(placeholder=lform.email.label.text) }}
-    </li>
-    <input type='submit' value='提交'/>
-</ul>
+
+<div class="row mgt20 mgb10">
+    <div class="span1"><span>登录</span></div>
+    <div class="offset1 span1" id="register-show">
+        <span>注册<i class="icon-circle-arrow-right icon-white"></i></span>
+    </div>
+</div>
+<div class="row">
+    <div class="span3">
+        {{ lform.email(placeholder=lform.email.label.text, class_="span3") }}
+    </div>
+</div>
+<div class="row">
+    <div class="span3">
+        {{ lform.password(placeholder=lform.password.label.text, class_="span3") }}
+    </div>
+</div>
+<div class="row">
+    <div class="span3"><input id="btn-login" type="button" value="登录" class="btn btn-info"/></div>
+</div>
+<div class="row">
+    <div class="span1">
+        <input type="checkbox" />
+        <span>记住我</span>
+    </div>
+    <div class="offset1 span1">
+        <a href=""><span>忘记密码</span></a>
+    </div>
+</div>

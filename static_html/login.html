@@ -5,53 +5,21 @@
     <title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<! -- bootstrap -->
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" media="screen">
-	<style type="text/css">
-		* {
-			<!--border: 1px solid red;-->
-			min-height: 40px;
-			//padding: 5px;
-		}
-		.mgt20{
-			margin-top: 20px;
-		}
-		.mgt10{
-			margin-top: 10px;
-		}
-		.mgb20{
-			margin-bottom: 20px;
-		}
-		.mgb10{
-			margin-bottom: 10px;
-		}
-		.pdl20{
-			padding-left:30px;
-		}
-		#btn-login {
-			width:210px;
-			margin:auto 5px 10px;
-			height: 40px;
-		}
-		a, a:hover, a:focus {
-			color: #ffffff;
-		}
-		.fl{
-			float: left;
-		}
-	</style>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" href="login.css" type="text/css" media="screen" />
 </head>
 <body>
-	<div class="container-fluid" style="background-color:#0078D8;color: #ffffff;">
+	<div class="container-fluid" id="login_header">
 		<div class="container">
 			<div class="row">
-				<div class="span5" style="margin-top:50px;">
-					<h1 style="letter-spacing: 3px;line-height:85px;margin-top:0px;font-size:80px;font-weight:lighter;">CGK</h1>
+				<div class="span5 mgt50">
+					<h1 id="site_title">CGK</h1>
 					<h5>cgk's home!</h5>
 					<h5>CG客,聚集国内CG领军人物!</h5>
 				</div>
 				<div class="offset1 span6">
-					<div class="row mar20" >
-						<div id="register-form" class="offset3 span3" style="display:None;">
+					<div class="row mgt10" >
+						<div id="register-form" class="offset3 span3">
 							<form action="">
 							<div class="row mgt20 mgb10">
 								<div class="span1"><span>注册帐号</span></div>
@@ -80,7 +48,7 @@
 							</div>
 							</form>
 						</div>
-						<div id="login-form" class="offset3 span3" style="margin-top:50px;" >
+						<div id="login-form" class="offset3 span3 mgt30 hide">
 							<form action="">
 							<div class="row mgt20 mgb10">
 								<div class="span1"><span>登录</span></div>
@@ -113,7 +81,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid" style="background-color:#EFF2F5">
+	<div class="container-fluid" id="login_body">
 		<div class="container">
 			<div class="row">
 				<div class="span4 mgb20">
@@ -188,7 +156,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="offset1 span6" style="border:1px solid blue;min-height:300px;">
+				<div class="offset1 span6" id="login_subject">
 					
 				</div>
 			</div>
@@ -196,16 +164,7 @@
 	</div>
 	<script type="text/javascript" src="jquery_1.10.2.min.js"></script>
 	<script type="text/javascript" src='bootstrap/js/bootstrap.min.js'></script>
-	<script type="text/javascript">
-		$(function(){
-			$('#login-show').click(function(){
-				$('#login-form').show().siblings('#register-form').hide();
-			})
-			$('#register-show').click(function(){
-				$('#register-form').show().siblings('#login-form').hide();
-			})
-		})
-	</script>
+    <script type="text/javascript" src="common.js"></script>
 </body>
 </html>
 

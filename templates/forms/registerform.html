@@ -1,7 +1,42 @@
 {% autoescape None %}
 {% module xsrf_form_html() %}
 
-{{ rform.email() }}
-{{ rform.firstname() }}
-{{ rform.password() }}
-{{ rform.rpassword() }}
+<div class="row mgt20 mgb10">
+    <div class="span1"><span>注册帐号</span></div>
+    <div class="offset1 span1" id="login-show">
+        <span>登录<i class="icon-circle-arrow-right icon-white"></i></span>
+    </div>
+</div>
+<div class="row">
+    <div class="span1">
+        {{ rform.firstname(class_="span1", placeholder=u"姓") }}
+    </div>
+    <div class="span1">
+        {{ rform.lastname(class_="span2", placeholder=u'名') }}
+    </div>
+</div>
+<div class="row">
+    <div class="span3">
+        {{ rform.email(class_="span3", placeholder=u'邮箱') }}
+    </div>
+</div>
+<div class="row">
+    <div class="span3">
+        {{ rform.password(class_="span3", placeholder=u"密码") }}
+    </div>
+</div>
+<div class="row">
+    <div class="span3">
+        {{ rform.rpassword(class_="span3", placeholder=u"密码确认") }}
+    </div>
+</div>
+<div class="row">
+    <div class="span3"><input id="btn-login" type="button" value="注册CGK" class="btn btn-info"/></div>
+</div>
+<div class="row pdl20 mgt10">
+    <p><a href=""><strong>使用新浪微波登录</strong></a></p>
+</div>
+<div class="row pdl20">
+    <p><a href=""><strong>使用腾讯qq登录</strong></a></p>
+</div>
+</form>

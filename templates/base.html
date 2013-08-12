@@ -7,7 +7,8 @@
     </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<! -- bootstrap -->
-    <link rel="stylesheet" href="{{ static_url('bootstrap/css/bootstrap.min.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ static_url('bootstrap/css/bootstrap.min.css') }}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{{ static_url('css/login.css') }}" type="text/css" media="screen" />
 </head>
 <body>
     {% block header %}
@@ -18,5 +19,6 @@
     {% end %}
     <script type="text/javascript" src="{{ static_url('jquery_1.10.2.min.js') }}"></script>
     <script type="text/javascript" src="{{ static_url('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ static_url('js/common.js') }}"></script>
 </body>
 </html>
