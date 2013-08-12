@@ -143,7 +143,7 @@ class Subject(Base):
     #create_time = Column(Time(), default=datetime.now, doc=u'创建时间')
 
 
-class Works(Base):
+class Work(Base):
     """
     作品主表
     """
@@ -191,7 +191,7 @@ class Source(Base):
         self.sc_long_desc = long_desc
 
 
-class article(Base):
+class Article(Base):
     """
     资源主表
     """
@@ -224,6 +224,7 @@ class Question(Base):
                       'mysql_engine': 'InnoDB',}
 
     q_id = Column(Integer, primary_key=True, doc=u'问题id')
+    uid = Column(Integer, ForeignKey('user.uid'))
     q_short_desc = Column(Unicode(256), doc=u'简述')
     q_long_desc = Column(Text, doc=u'明细')
     anwsers =  relationship('Answer', backref='question', doc=u'回答')
@@ -243,7 +244,7 @@ class Answer(Base):
                       'mysql_engine': 'InnoDB',}
 
     an_id = Column(Integer, primary_key=True, doc=u'回答id')
-    q_id = Column(Integer, ForeignKey('question.qid'))
+    q_id = Column(Integer, ForeignKey('question.q_id'))
     uid = Column(Integer, ForeignKey('user.uid'))
     an_content = Column(Text, doc=u'内容')
     create_time = Column(Time(), default=datetime.now, doc=u'创建时间')

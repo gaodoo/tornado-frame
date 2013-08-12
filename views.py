@@ -116,6 +116,30 @@ class AdminLoginHandler(AdminBaseHandler):
         self.redirect('/admin')
 
 
+class UserAdmin(AdminBaseHandler):
+    """
+    admin the uesr
+    """
+    def get(self, step):
+        if step == 'list':
+            self.get_list()
+        elif step == 'view':
+            self.get_view()
+        elif step == 'modify':
+            self.get_modify()
+        elif step == 'create':
+            self.get_create()
+
+    def post(self, step):
+        if step == 'delete':
+            pass
+        elif step == 'update':
+            pass
+        elif step == 'create':
+            pass
+
+
+
 class IndexHandler(BaseHandler):
     def get(self):
         """
