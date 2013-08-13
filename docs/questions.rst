@@ -22,6 +22,7 @@ models db_session问题
 tornado问题
 ====================
 1) 理解异步web框架
+2) self.finish() TODO:
 
 
 bootstrap问题
@@ -31,3 +32,6 @@ bootstrap问题
 
 wtforms问题
 ====================
+validoters
+unittest
+

@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from os import path
-import importlib
 import sys
-from pkgutil import iter_modules
+import importlib
 import optparse
+import cPickle as pickle
+from pkgutil import iter_modules
+from os import path
+from core import db_session
+from core import db_session_test
+
 
 class Commands(object):
     default_settins = {}
@@ -94,6 +98,7 @@ def _run_print_help(parser, func, *args, **kw):
         if e.print_help:
             parser.print_help()
         sys.exit(0)
+
 
 if __name__ == '__main__':
     execute()

@@ -14,7 +14,7 @@ def load_database(db_session, fixture):
     # TODO: the fixture file path controls
 
     # load the fixture
-    datas = pickle.loads("fixture")
+    datas = pickle.loads(fixture)
     db_session.add_all(datas)
     db_session.commit()
     print "load database ok"

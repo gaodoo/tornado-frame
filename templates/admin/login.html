@@ -1,12 +1,17 @@
 {% extends "../admin_base.html" %}
 
-{% block %}
 
-{% block main %}
-    <h1 style="text-align:center;margin-bottom:40px;">admin login</h1>
-    <form class="form-horizontal" action="/admin/login" method="post" name="fm" >
-        <fieldset>
-            {% include "../forms/admin_login_form.html" %}
-        </fieldset>
-    </form>
+{% block content %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+        <h1 style="text-align:center;margin:40px auto;">admin login</h1>
+        {% block main %}
+            <div class="offset4 span8">
+                <form class="form-horizontal" action="/admin/login" method="post" name="fm" >
+                    <fieldset>
+                        {% include "../forms/admin_login_form.html" %}
+                    </fieldset>
+                </form>
+            </div>
+        {% end %}
 {% end %}

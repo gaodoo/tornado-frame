@@ -2,7 +2,6 @@
 # encoding: utf-8
 
 from views import (
-    HelloHanlder,
     IndexHandler,
     LoginHandler,
     RegisterHandler,
@@ -13,7 +12,6 @@ from views import (
 
 urls_pattern = [
     ('/', IndexHandler),
-    ('/hello', HelloHanlder),
     ('/login', LoginHandler),
     ('/register', RegisterHandler),
 ]

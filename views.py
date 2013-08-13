@@ -20,8 +20,7 @@ class BaseHandler(tornado.web.RequestHandler):
         # user the utils login and set user
         # on the session. or return none if fails
 
-        # login_result = user_login(email, password)
-        login_result = None
+        login_result = User.login(email, password, self.db)
         if login_result:
             self.session.set_session('user', login_result)
 
@@ -148,8 +147,8 @@ class IndexHandler(BaseHandler):
         """
         if not self.current_user:
             self.redirect('/login')
-
-        self.write('index page')
+        else:
+            self.write('index page')
 
 class LoginHandler(BaseHandler):
     def get(self):
@@ -158,8 +157,9 @@ class LoginHandler(BaseHandler):
         """
         lform = LoginForm()
         rform = RegisterForm()
+        show = 0 # 0 show the register, 1 show the login
 
-        self.render('login.html', lform=lform, rform=rform)
+        self.render('login.html', lform=lform, rform=rform, show=show)
 
     def post(self):
         """
@@ -170,12 +170,14 @@ class LoginHandler(BaseHandler):
         go to the index page
         """
         lform = LoginForm(self.request.arguments)
-        if not form.validate():
+        if not lform.validate() or not self.user_login(lform.email.data, lform.password.data):
             rform = RegisterForm()
-            self.render('login.html', lform=lform, rform=rform)
+            show = 'l'
+            self.render('login.html', lform=lform, rform=rform, show=1)
+        else:
+            self.write('index page')
+            #self.redirect('/')
 
-        #user = self.user_login(form.)
-        self.render('index.html')
 
 class RegisterHandler(BaseHandler):
     """ handler for register"""

@@ -6,14 +6,16 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 
-engine = create_engine('mysql://root:root@localhost/cgk', echo=True)
+echo=False
+
+engine = create_engine('mysql://root:root@localhost/cgk', echo=echo)
 Base = declarative_base()
 
 _Session = sessionmaker(bind=engine)
 db_session = _Session(bind=engine)
 
 # test db for unittest and ftstest
-engine_test = create_engine('mysql://root:root@localhost/cgk_test', echo=True)
+engine_test = create_engine('mysql://root:root@localhost/cgk_test', echo=echo)
 _Session_test = sessionmaker(bind=engine_test)
 db_session_test = _Session(bind=engine_test)
 

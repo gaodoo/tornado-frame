@@ -1,6 +1,15 @@
 {% autoescape None %}
 {% module xsrf_form_html() %}
 
+{% if rform.errors %}
+<ul class="errors">
+    {% for fieldname, errors in errors %}
+        {% for error in errors %}
+        <li>{{ form[fieldname].label() }}: {{ error }}</li>
+        {% end %}
+    {% end %}
+</ul>
+{% end %}
 <div class="row mgt20 mgb10">
     <div class="span1"><span>注册帐号</span></div>
     <div class="offset1 span1" id="login-show">
@@ -31,7 +40,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="span3"><input id="btn-login" type="button" value="注册CGK" class="btn btn-info"/></div>
+    <div class="span3"><input id="btn-login" type="submit" value="注册CGK" class="btn btn-info"/></div>
 </div>
 <div class="row pdl20 mgt10">
     <p><a href=""><strong>使用新浪微波登录</strong></a></p>

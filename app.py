@@ -5,7 +5,7 @@ import tornado.web
 import tornado.ioloop
 import redis
 from core import RedisSessionStore
-from core import db_session
+from core import db_session, db_session_test
 from core import engine
 from settings import url_handlers, settings
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -22,9 +22,11 @@ class Application(tornado.web.Application):
 
 
 application = Application(url_handlers, db_session, **settings)
+app_test = Application(url_handlers, db_session_test, **settings)
 
 
 if __name__ == "__main__":
     application.listen(8000)
+    app_test.listen(8001)
     tornado.ioloop.IOLoop.instance().start()
 

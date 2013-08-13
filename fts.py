@@ -3,8 +3,15 @@
 
 import unittest
 import time
+import tornado.ioloop
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from core import db_session_test as db_session
+from core import drop_all_for_test as drop_all
+from core import create_all_for_test as create_all
+from commands import load_database, dumps_database
+from app import Application, url_handlers, settings
+from models import *
 
 class BaseFtsTest(unittest.TestCase):
     """
@@ -14,13 +21,30 @@ class BaseFtsTest(unittest.TestCase):
     base_url = 'http://localhost:8000'
 
     def setUp(self):
+        self._fixture_setup()
+        #self._server_setup()
         self.br = webdriver.Firefox()
-        self.br.implicitly_wait(3)
-        #self.setUphooks()
+        self.br.implicitly_wait(5)
+
+    def _fixture_setup(self):
+        pass
+        #"""
+        #if has fixture, use pickle install it
+        #"""
+        create_all()
+        if hasattr(self, 'fixture'):
+            fixture = open(self.fiture)
+            load_database(db_session, fixture)
+
+    #def _server_setup(self):
+        #self.app = Application(url_handlers,
+            #db_session, **settings)
+        #self.app.listen(8001)
+        #tornado.ioloop.IOLoop.instance().start()
 
     def tearDown(self):
-        #self.tearDownhooks()
         self.br.quit()
+        #drop_all()
 
 
 class LoginTest(BaseFtsTest):
@@ -42,7 +66,20 @@ class LoginTest(BaseFtsTest):
         title = self.br.title
         self.assertEqual(u'login or register CGK', title)
 
+        # we click the "登录", now we see the login form
+        login_show = self.br.find_element_by_id('login-show')
+        login_show.click()
+
         # login with wrong email and password, fails
+        email = self.br.find_elements_by_name('email')[1]
+        password = self.br.find_elements_by_name('password')[1]
+        submit = self.br.find_elements_by_css_selector('input[type="submit"]')[1]
+        email.send_keys('123456@qq.com')
+        password.send_keys(123456)
+        submit.click()
+        error = self.br.find_element_by_css_selector('div.error')
+        self.assertTrue(error is not None)
+
 
         # after three fail we need input the 验证码
 
@@ -78,6 +115,7 @@ class AdminTest(BaseFtsTest):
         # we goto the page /admin without login,
         # we were take to the admin_login page
         self.br.get(self.admin_base_url)
+        time.sleep(4)
         self.assertEqual(u'CGK Admin', self.br.title)
         url = '/'.join([self.admin_base_url, 'login'])
         self.assertEqual(url, self.br.current_url)

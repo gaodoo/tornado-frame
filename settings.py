@@ -25,19 +25,19 @@ databases = {
     'default': {
         'driven': 'mysql',
         'host': 'localhost',
-        'user': 'root'
+        'user': 'root',
         'password': 'root',
         'port': 'port',
         'database': 'cgk',
-    }
+    },
     'test': {
         'driven': 'mysql',
         'host': 'localhost',
-        'user': 'root'
+        'user': 'root',
         'password': 'root',
         'port': 'port',
         'database': 'cgk_test',
-    }
+    },
 }
 
 # TODO: the reids database settings

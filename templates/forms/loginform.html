@@ -1,6 +1,15 @@
 {% autoescape None %}
 {% module xsrf_form_html() %}
 
+{% if lform.errors %}
+<ul class="errors">
+    {% for fieldname, errors in lform.errors.items() %}
+        {% for error in errors %}
+        <li>{{ error }}</li>
+        {% end %}
+    {% end %}
+</ul>
+{% end %}
 <div class="row mgt20 mgb10">
     <div class="span1"><span>登录</span></div>
     <div class="offset1 span1" id="register-show">
@@ -18,11 +27,11 @@
     </div>
 </div>
 <div class="row">
-    <div class="span3"><input id="btn-login" type="button" value="登录" class="btn btn-info"/></div>
+    <div class="span3"><input id="btn-login" type="submit" value="登录" class="btn btn-info"/></div>
 </div>
 <div class="row">
     <div class="span1">
-        <input type="checkbox" />
+        {{ lform.remind_me() }}
         <span>记住我</span>
     </div>
     <div class="offset1 span1">
