@@ -79,7 +79,7 @@ class User(Base):
             raise ValueError("not correct email")
 
     @staticmethod
-    def login(email, password, dbsession=db_session):
+    def login(email, password):
         """
         TODO: unittest
         return User instance or None
@@ -90,7 +90,7 @@ class User(Base):
         return user
 
     @staticmethod
-    def register(email, password, firstname, lastname, dbsession=db_session):
+    def register(email, password, firstname, lastname):
         """
         register new user
         TODO: 设计输出, try ..except

@@ -7,7 +7,7 @@ from core import db_session_test
 from manager import Commands as Com
 
 
-def dumps_database(test=False):
+def dumps_database(f=sys.stdout):
     # insert the project path
     project_dir = path.dirname(path.dirname(__file__))
     sys.path.insert(0, project_dir)
@@ -19,29 +19,22 @@ def dumps_database(test=False):
     results = []
     for model in models.__all__:
         if issubclass(model, models.Base):
-            if not test:
-                datas = db_session.query(
-                    getattr(models, model)).all()
-            else:
-                datas = db_session_test.query(
-                    getattr(models, model)).all()
+            datas = db_session.query(
+                getattr(models, model)).all()
             result.extends(datas)
 
-    # dumps the data with pickle to file in the
-    # the sys.args. if not dumps to the stdout
-    file = sys.argv[1] or sys.stdout
-    pickle.dump(result, file)
+    # dumps the data to the file
+    pickle.dump(result, f)
     print 'dumps database ok'
 
 
-class Command(Com):
-
-    def run(self, args, opts):
-        pass
-
 if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] == 'test':
-        dumps_database(True)
-    else:
-        dumps_database()
+    try:
+        if len(sys.argv) >1 :
+            f = open(sys.argv[1])
+        else:
+            f = sys.stdout
+    except Exception:
+        print "open file: %s, errors" % f.name
+    dumps_database(f)
 

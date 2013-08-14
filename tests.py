@@ -4,36 +4,11 @@
 import unittest
 from core import Base
 from core import db_session_test as db_session
-from core import engine_test as engine
-from core import create_all_for_test as create_all
-from core import drop_all_for_test as drop_all
+from core import engine
+from core import create_all
+from core import drop_all
 from models import User
 from forms import LoginForm, RegisterForm
-
-
-class FixtureTest(unittest.TestCase):
-    """
-    the base test for use tmp_db and install self.fixture
-    """
-    def setUp(self):
-        self._test_db_setup()
-        self._fixture_setup()
-
-    def tearDown(self):
-        self._fixture_remove()
-        self._test_db_uninstall()
-
-    def _test_db_setup():
-        create_all()
-
-    def _fixture_setup(self):
-        if self.fixture:
-            # TODO: install fixture
-            pass
-
-    def _fixture_remove(self):
-        pass
-
 
 
 class LoginUtilsTest(unittest.TestCase):
@@ -41,8 +16,6 @@ class LoginUtilsTest(unittest.TestCase):
     test for utils.user_login
     """
     def setUp(self):
-        drop_all()
-        create_all()
         email = 'tmp@tmp.com'
         password = '123456'
         u = User(email, password, 'firstname', 'lastname')
@@ -50,9 +23,7 @@ class LoginUtilsTest(unittest.TestCase):
         db_session.commit()
 
     def tearDown(self):
-        #self._fixture_remove()
-        #self._test_db_uninstall()
-        drop_all()
+        pass
 
     def test_login_with_error_msg_return_none(self):
         email = 'tmp@tmp.com'

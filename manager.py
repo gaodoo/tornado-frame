@@ -8,7 +8,6 @@ import cPickle as pickle
 from pkgutil import iter_modules
 from os import path
 from core import db_session
-from core import db_session_test
 
 
 class Commands(object):

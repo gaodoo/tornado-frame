@@ -6,14 +6,14 @@ import time
 import tornado.ioloop
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from core import db_session_test as db_session
-from core import drop_all_for_test as drop_all
-from core import create_all_for_test as create_all
-from commands import load_database, dumps_database
+from core import db_session
+from core import drop_all
+from core import create_all
+from commands import load_database, dump_database
 from app import Application, url_handlers, settings
 from models import *
 
-class BaseFtsTest(unittest.TestCase):
+class BaseTest(unittest.TestCase):
     """
     the base class for fts test, setUp the firefox,
     and teardown after test finish, default the Base_url
@@ -22,32 +22,22 @@ class BaseFtsTest(unittest.TestCase):
 
     def setUp(self):
         self._fixture_setup()
-        #self._server_setup()
         self.br = webdriver.Firefox()
         self.br.implicitly_wait(5)
 
     def _fixture_setup(self):
-        pass
-        #"""
-        #if has fixture, use pickle install it
-        #"""
-        create_all()
+        """
+        if has fixture, use pickle install it
+        """
         if hasattr(self, 'fixture'):
-            fixture = open(self.fiture)
+            fixture = open(self.fixture)
             load_database(db_session, fixture)
-
-    #def _server_setup(self):
-        #self.app = Application(url_handlers,
-            #db_session, **settings)
-        #self.app.listen(8001)
-        #tornado.ioloop.IOLoop.instance().start()
 
     def tearDown(self):
         self.br.quit()
-        #drop_all()
 
 
-class LoginTest(BaseFtsTest):
+class LoginTest(BaseTest):
 
     def test_signup_and_login_to_index(self):
         """
@@ -97,7 +87,7 @@ class LoginTest(BaseFtsTest):
         # done
 
 
-class AdminTest(BaseFtsTest):
+class AdminTest(BaseTest):
     """
     test for the admin pages
     """

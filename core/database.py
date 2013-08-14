@@ -15,15 +15,9 @@ _Session = sessionmaker(bind=engine)
 db_session = _Session(bind=engine)
 
 # test db for unittest and ftstest
-engine_test = create_engine('mysql://root:root@localhost/cgk_test', echo=echo)
-_Session_test = sessionmaker(bind=engine_test)
-db_session_test = _Session(bind=engine_test)
 
 def create_all():
     Base.metadata.create_all(bind=engine)
 
-def create_all_for_test():
-    Base.metadata.create_all(bind=engine_test)
-
-def drop_all_for_test():
-    Base.metadata.drop_all(bind=engine_test)
+def drop_all():
+    Base.metadata.drop_all(bind=engine)
