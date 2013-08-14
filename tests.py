@@ -3,12 +3,46 @@
 
 import unittest
 from core import Base
-from core import db_session_test as db_session
+from core import db_session
 from core import engine
 from core import create_all
 from core import drop_all
 from models import User
 from forms import LoginForm, RegisterForm
+from tornado.testing import AsyncHTTPTestCase, AsyncTestCase
+from tornado.httpclient import AsyncHTTPClient, HTTPClient
+
+
+class IndexTestCase(AsyncTestCase):
+    """
+    docstring for IndexTestCase
+    """
+    def test_login(self):
+        h_client = HTTPClient()
+        response = h_client.fetch('http://localhost:8000')
+        print response
+        print dir(response)
+        self.assertIn('login', response.body)
+        response = h_client.fetch('http://localhost:8000',
+                auth_username='123456@qq.com', auth_password='123456',)
+        print response.effective_url
+        print response.code
+        print response.request
+        print dir(response.request)
+
+
+
+class Index2TestCase(AsyncHTTPTestCase):
+    """
+    docstring for IndexHandler
+    """
+    def get_app(self):
+        """
+        must return Applicatioin
+        """
+        pass
+
+
 
 
 class LoginUtilsTest(unittest.TestCase):

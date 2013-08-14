@@ -52,7 +52,7 @@ class RegisterHandler(BaseHandler):
 
         self.render('login.html', lform=lform, rform=rform)
 
-    def register(self):
+    def post(self):
         rform = RegisterForm(self.request.arguments)
         if not form.validate():
             lform = LoginForm()

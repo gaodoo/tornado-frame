@@ -133,16 +133,6 @@ class Subject(Base):
         self.s_desc = s_desc
 
 
-#class SourceBase(Base):
-    #"""
-    #抽象models, TODO: not tables
-    #"""
-    #__table_args__ = {'mysql_charset': 'utf8',
-                      #'mysql_engine': 'InnoDB',}
-
-    #create_time = Column(Time(), default=datetime.now, doc=u'创建时间')
-
-
 class Work(Base):
     """
     作品主表
