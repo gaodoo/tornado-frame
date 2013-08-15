@@ -36,18 +36,20 @@ python fts.py
 
 可访问url
 ======================
-1)localhost:8000/   主页:未登录重定向到login, 或输出index page
-2)localhost:8000/admin 后台主页，未登录冲定向到admin/login
-3)localhost:8000/admin/login, 后台登录页
-4)localhost:8000/login 注册/登录页
+1) localhost:8000/
+主页:未登录重定向到login, 或输出index page
+2) localhost:8000/admin
+后台主页，未登录冲定向到admin/login
+3) localhost:8000/admin/login, 后台登录页
+4) localhost:8000/login 注册/登录页
 
 
 
 目前还有比较多问题
 =====================
-1)static_html目录下是写了一部分的静态html页面,可直接用浏览器打开,实现还比较粗糙，
-2)因为整合功能测试和单元测试太难，所以代码写起来也比较费劲。
-3)fts.py为功能测试(验收测试)代码,实现还较少
-4)test.py为单元测试代码，实现还较少
-5)models.py为数据建模部分
-6)commands目录下为导入导出数据的两个工具，实现还比较简陋
+1) static_html目录下是写了一部分的静态html页面,可直接用浏览器打开,实现还比较粗糙，
+2) 因为整合功能测试和单元测试太难，所以代码写起来也比较费劲。
+3) fts.py为功能测试(验收测试)代码,实现还较少
+4) test.py为单元测试代码，实现还较少
+5) models.py为数据建模部分
+6) commands目录下为导入导出数据的两个工具，实现还比较简陋
