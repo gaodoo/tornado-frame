@@ -6,13 +6,13 @@
 {% block content %}
 <div class="container-fluid">
 	<div class="row-fluid">
-		<div class="span3">
+		<div class="span2">
 			{% block sidebar %}
-
+                {% include "includes/admin_sidebar.html" %}
 			{% end %}
 		</div>
 	<!-- /the admin sidebar -->
-		<div class="span9">
+		<div class="span10">
 			{% block main %}
 			{% end %}
 		</div>

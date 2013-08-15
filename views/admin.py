@@ -11,6 +11,33 @@ class AdminIndexHandler(AdminBaseHandler):
     def get(self):
         self.render('admin/index.html')
 
+class AdminListHandler(AdminBaseHandler):
+    """
+    the admin list page of models
+    """
+    _model_name_d = {
+        'user': User,
+    }
+
+    def get(self, model_name):
+        """
+        分页显示models数据
+        """
+        model = self._model_name_d[model_name]
+        page = self.get_argument('page', 1)
+        if page < 1: page = 1
+
+        model_len = self.db.query(model).count()
+        pagesize = 35;
+        if model_len / pagesize < page :
+            page = model_len / pagesize
+        offset = page * pagesize
+
+        results = self.db.query(model)[offset:pagesize]
+        print results[0]
+        print dir(results[0])
+        self.render('admin/list.html', results=results, page=page, pagesize=pagesize)
+
 
 class AdminLoginHandler(AdminBaseHandler):
     """
@@ -26,30 +53,8 @@ class AdminLoginHandler(AdminBaseHandler):
         return login page or admin index page
         """
         form = LoginForm(self.request.arguments)
-        user = User.login(form.data.email, form.data.password)
-        if not form.validator() or not user:
+        user = self.user_login(form.email.data, form.password.data)
+        if not form.validate() or not user:
             self.render('admin/login.html', form=form)
+
         self.redirect('/admin')
-
-
-class AdminUserHandler(AdminBaseHandler):
-    """
-    admin the uesr
-    """
-    def get(self, step):
-        if step == 'list':
-            self.get_list()
-        elif step == 'view':
-            self.get_view()
-        elif step == 'modify':
-            self.get_modify()
-        elif step == 'create':
-            self.get_create()
-
-    def post(self, step):
-        if step == 'delete':
-            pass
-        elif step == 'update':
-            pass
-        elif step == 'create':
-            pass

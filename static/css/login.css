@@ -24,7 +24,7 @@
     margin:auto 5px 10px;
     height: 40px;
 }
-a, a:hover, a:focus {
+#header a,#header a:hover,#header a:focus {
     color: #ffffff;
 }
 .fl{

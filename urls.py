@@ -13,7 +13,7 @@ from views import (
 from views import (
     AdminIndexHandler,
     AdminLoginHandler,
-    AdminUserHandler,
+    AdminListHandler,
 )
 
 
@@ -27,7 +27,7 @@ urls_pattern = [
 urls_pattern_admin = [
     ('/admin', AdminIndexHandler),
     ('/admin/login', AdminLoginHandler),
-    ('/admin/user', AdminUserHandler),
+    ('/admin/list/(\w+)', AdminListHandler),
 ]
 
 urls_pattern.extend(urls_pattern_admin)

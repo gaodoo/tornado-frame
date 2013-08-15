@@ -4,7 +4,7 @@
 from admin import (
     AdminIndexHandler,
     AdminLoginHandler,
-    AdminUserHandler,
+    AdminListHandler,
 )
 
 from view import (
@@ -22,5 +22,5 @@ __all__ = (
     'RegisterStepHandler',
     'AdminIndexHandler',
     'AdminLoginHandler',
-    'AdminUserHandler',
+    'AdminListHandler',
 )

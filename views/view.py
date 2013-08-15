@@ -54,16 +54,16 @@ class RegisterHandler(BaseHandler):
 
     def post(self):
         rform = RegisterForm(self.request.arguments)
-        if not form.validate():
+        if not rform.validate():
             lform = LoginForm()
             self.render('login.html', lform=lform, rform=rform)
         # register uesr
-        user = User(rform.data.email, rform.data.password,
-                rform.data.firstname, rform.lastname)
+        user = User(rform.email.data, rform.password.data,
+                rform.firstname.data, rform.lastname.data)
         self.db.add(user)
         self.db.commit()
         # set user into the session
-        self.set_session('user', user)
+        self.session['user'] = user
         self.render('register_step.html')
 
 class RegisterStepHandler(BaseHandler):

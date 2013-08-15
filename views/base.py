@@ -12,7 +12,7 @@ class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
         # TODO: the login url to set the user in session
         if self.session and 'user' in self.session:
-            return session['user']
+            return self.session['user']
         else:
             return None
 
@@ -22,7 +22,7 @@ class BaseHandler(tornado.web.RequestHandler):
 
         login_result = User.login(email, password)
         if login_result:
-            self.session.set_session('user', login_result)
+            self.session['user'] = login_result
 
         return login_result
 
@@ -66,7 +66,7 @@ class AdminBaseHandler(BaseHandler):
         return none
         """
         cur_user = super(AdminBaseHandler, self).get_current_user()
-        if not cur_user or not cur_uesr.is_admin:
+        if not cur_user or not cur_user.is_admin:
             return None
         else:
             return cur_user

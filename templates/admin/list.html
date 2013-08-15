@@ -1,0 +1,48 @@
+{% extends "../admin_base.html" %}
+
+{% block main %}
+    <h4> 你好，管理员 </h4>
+    <ul class="breadcrumb">
+        <li><a href="#">首页</a> <span class="divider">/</span></li>
+        <li><a href="#">Library</a> <span class="divider">/</span></li>
+        <li class="active">Data</li>
+    </ul>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li class="disabled"><a href="#">Prev</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">Next</a></li>
+        </ul>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>用户名</th>
+                <th>邮箱</th>
+                <th>联系方式</th>
+                <th>管理</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for result in results %}
+                <td> {{ result }}</td.
+                {% end %}
+            <td>123456@qq.com</td>
+            <td>123456</td>
+            <td><a>查看</a>|<a>管理</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination pagination-centered">
+        <ul>
+            <li class="disabled"><a href="#">Prev</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">Next</a></li>
+        </ul>
+    </div>
+{% end %}
