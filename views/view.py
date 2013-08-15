@@ -40,8 +40,7 @@ class LoginHandler(BaseHandler):
             show = 'l'
             self.render('login.html', lform=lform, rform=rform, show=1)
         else:
-            self.write('index page')
-            #self.redirect('/')
+            self.redirect('/')
 
 
 class RegisterHandler(BaseHandler):

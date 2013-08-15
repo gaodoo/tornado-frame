@@ -32,7 +32,7 @@ class User(Base):
                       'mysql_engine': 'InnoDB',}
 
     uid = Column(Integer, primary_key=True, doc=u'用户id')
-    email = Column(Unicode(128), unique=True, nullable=False, doc=u'邮箱')
+    email = Column(String(128), unique=True, nullable=False, doc=u'邮箱')
     password = Column(String(128), nullable=False, doc=u'密码')
     firstname = Column(String(16), doc=u'用户姓')
     lastname = Column(String(16), doc=u'用户名')

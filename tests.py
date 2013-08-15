@@ -20,29 +20,9 @@ class IndexTestCase(AsyncTestCase):
     def test_login(self):
         h_client = HTTPClient()
         response = h_client.fetch('http://localhost:8000')
-        print response
-        print dir(response)
         self.assertIn('login', response.body)
         response = h_client.fetch('http://localhost:8000',
                 auth_username='123456@qq.com', auth_password='123456',)
-        print response.effective_url
-        print response.code
-        print response.request
-        print dir(response.request)
-
-
-
-class Index2TestCase(AsyncHTTPTestCase):
-    """
-    docstring for IndexHandler
-    """
-    def get_app(self):
-        """
-        must return Applicatioin
-        """
-        pass
-
-
 
 
 class LoginUtilsTest(unittest.TestCase):
@@ -50,14 +30,20 @@ class LoginUtilsTest(unittest.TestCase):
     test for utils.user_login
     """
     def setUp(self):
+        db_session.query(User).delete()
         email = 'tmp@tmp.com'
         password = '123456'
-        u = User(email, password, 'firstname', 'lastname')
+        u = User(email, password, u'firstname', u'lastname')
+        u.is_admin = True
         db_session.add(u)
         db_session.commit()
+        #if hasattr(self, 'fixture'):
+            #fixture = open(self.fixture)
+            #load_database(db_session, fixture)
 
     def tearDown(self):
-        pass
+        db_session.query(User).delete()
+        db_session.commit()
 
     def test_login_with_error_msg_return_none(self):
         email = 'tmp@tmp.com'

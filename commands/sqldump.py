@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+import sys
 import cPickle as pickle
 from core import db_session
-from core import db_session_test
 from manager import Commands as Com
 
 
-def dumps_database(f=sys.stdout):
+def dump_database(f=sys.stdout):
     # insert the project path
     project_dir = path.dirname(path.dirname(__file__))
     sys.path.insert(0, project_dir)
