@@ -36,7 +36,7 @@ python fts.py
 
 2) 单元测试部分
 项目根目录下运行
-python fts.py
+python tests.py
 
 
 可访问url
